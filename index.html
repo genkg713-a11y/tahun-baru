@@ -2,573 +2,472 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#100719">
-<title>NEW YEAR 2027 — TEAM ELITE FAMILY</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY NEW YEAR 2027 - TEAM ELITE FAMILY</title>
 
-<style>
-:root {
-  --gold: #ffd778;
-  --red: #ff303b;
-  --white: #fff9ed;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-* {
-  box-sizing: border-box;
-}
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
 
-html, body {
-  width: 100%;
-  min-height: 100%;
-  margin: 0;
-}
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+            background: #100817;
+            color: white;
+        }
 
-body {
-  min-height: 100vh;
-  min-height: 100dvh;
-  overflow-x: hidden;
-  background: #100719;
-  color: var(--white);
-  font-family: Arial, Helvetica, sans-serif;
-}
+        /* BACKGROUND */
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background-image: url("https://s15.gifyu.com/images/bWmeJ.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
 
-/* BACKGROUND GAMBAR */
-.background {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background-color: #100719;
-  background-image:
-    linear-gradient(
-      180deg,
-      rgba(10, 3, 20, .12),
-      rgba(10, 3, 20, .25)
-    ),
-    url("https://s15.gifyu.com/images/bWmeJ.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: contain;
-  pointer-events: none;
-}
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: rgba(8, 3, 15, 0.12);
+        }
 
-.background::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 35%,
-    rgba(8, 3, 18, .15) 100%
-  );
-}
+        /* KEMBANG API */
+        #fireworks {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-/* KEMBANG API */
-#fireworks {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
+        /* KONTEN UTAMA */
+        .container {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 35px 16px;
+            gap: 28px;
+        }
 
-/* KONTEN UTAMA */
-.page {
-  position: relative;
-  z-index: 2;
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 30px 18px;
-}
+        /* HAPPY NEW YEAR - DIAM, BERKEDIP, TRANSPARAN */
+        .main-title {
+            width: 100%;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(32px, 6vw, 76px);
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            color: rgba(255, 215, 0, 0.85);
+            text-shadow:
+                0 0 8px rgba(255, 215, 0, 0.6),
+                0 0 20px rgba(255, 140, 0, 0.4);
+            animation: kedipNewYear 2.5s ease-in-out infinite;
+        }
 
-.eyebrow {
-  color: var(--gold);
-  font-size: clamp(11px, 2vw, 14px);
-  font-weight: bold;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  text-shadow: 0 0 14px rgba(255, 204, 95, .7);
-}
+        @keyframes kedipNewYear {
+            0%, 100% {
+                opacity: 0.58;
+                text-shadow:
+                    0 0 5px rgba(255, 215, 0, 0.25),
+                    0 0 10px rgba(255, 140, 0, 0.15);
+            }
 
-/* HAPPY NEW YEAR - ELEGAN */
-.moving-title {
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  margin: 0 auto;
-}
+            50% {
+                opacity: 1;
+                text-shadow:
+                    0 0 12px rgba(255, 215, 0, 0.95),
+                    0 0 28px rgba(255, 140, 0, 0.8),
+                    0 0 45px rgba(255, 80, 0, 0.4);
+            }
+        }
 
-.moving-title h1 {
-  display: inline-block;
-  padding-left: 100%;
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(30px, 6.5vw, 72px);
-  line-height: 1.25;
-  font-weight: 900;
-  letter-spacing: clamp(2px, .8vw, 7px);
-  color: #fff4cb;
-  text-shadow:
-    0 0 8px rgba(255, 215, 120, .75),
-    0 0 22px rgba(255, 180, 55, .5),
-    0 0 45px rgba(255, 48, 59, .25);
-  animation: newYearMove 30s linear infinite;
-}
+        /* COUNTDOWN */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 14px;
+            width: 100%;
+            max-width: 900px;
+        }
 
-@keyframes newYearMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(-200%); }
-}
+        .countdown-box {
+            min-width: 125px;
+            padding: 20px 14px;
+            border: 1px solid rgba(255, 215, 0, 0.55);
+            border-radius: 14px;
+            background: rgba(20, 7, 29, 0.20);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            box-shadow:
+                0 0 12px rgba(255, 180, 0, 0.15),
+                inset 0 0 10px rgba(255, 255, 255, 0.03);
+            animation: glowBox 3s ease-in-out infinite;
+        }
 
-.year {
-  color: #ffd778;
-  text-shadow:
-    0 0 10px rgba(255, 215, 120, .95),
-    0 0 25px rgba(255, 180, 55, .75),
-    0 0 45px rgba(255, 48, 59, .45);
-}
+        @keyframes glowBox {
+            0%, 100% {
+                border-color: rgba(255, 215, 0, 0.35);
+                box-shadow: 0 0 8px rgba(255, 180, 0, 0.1);
+            }
 
-.subtitle {
-  margin: 18px 0 24px;
-  font-size: clamp(12px, 2.5vw, 17px);
-  letter-spacing: 3px;
-  color: #fff4e5;
-  text-shadow: 0 2px 8px #000;
-}
+            50% {
+                border-color: rgba(255, 215, 0, 0.9);
+                box-shadow:
+                    0 0 18px rgba(255, 180, 0, 0.35),
+                    inset 0 0 10px rgba(255, 255, 255, 0.06);
+            }
+        }
 
-/* COUNTDOWN */
-.countdown {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(7px, 2vw, 16px);
-  width: min(100%, 600px);
-}
+        .countdown-number {
+            display: block;
+            font-size: clamp(30px, 5vw, 48px);
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow:
+                0 0 8px rgba(255, 215, 0, 0.7),
+                0 0 18px rgba(255, 70, 0, 0.35);
+            animation: kedipAngka 1.8s ease-in-out infinite;
+        }
 
-/* KOLOM COUNTDOWN LEBIH TRANSPARAN */
-.time-box {
-  padding: clamp(12px, 3vw, 22px) 5px;
-  border: 1px solid rgba(255, 216, 120, .55);
-  border-radius: 14px;
+        #seconds {
+            animation-duration: 0.9s;
+        }
 
-  /* UBAH .28 MENJADI .15 JIKA INGIN LEBIH TRANSPARAN */
-  background: rgba(20, 7, 29, .28);
+        @keyframes kedipAngka {
+            0%, 100% {
+                opacity: 0.6;
+            }
 
-  box-shadow:
-    0 0 14px rgba(255, 181, 65, .10),
-    inset 0 0 10px rgba(255, 255, 255, .03);
+            50% {
+                opacity: 1;
+            }
+        }
 
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+        .countdown-label {
+            display: block;
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.9);
+        }
 
-  animation: boxGlow 2s ease-in-out infinite;
-}
+        /* TEAM ELITE FAMILY */
+        .team-title {
+            font-size: clamp(20px, 4vw, 34px);
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(
+                90deg,
+                #ff3030,
+                #ffd700,
+                #ffffff,
+                #ff3030
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: teamGradient 4s linear infinite,
+                       teamBlink 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 180, 0, 0.4));
+        }
 
-/* ANGKA COUNTDOWN */
-.number {
-  display: block;
-  font-size: clamp(25px, 6vw, 49px);
-  font-weight: 900;
-  color: #fff0b8;
-  font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 14px rgba(255, 196, 82, .45);
-  animation: numberBlink 1.4s ease-in-out infinite;
-}
+        @keyframes teamGradient {
+            0% {
+                background-position: 0% center;
+            }
 
-/* DETIK BERKEDIP LEBIH CEPAT */
-#seconds {
-  animation: secondsBlink .65s ease-in-out infinite;
-}
+            100% {
+                background-position: 300% center;
+            }
+        }
 
-.unit {
-  display: block;
-  margin-top: 5px;
-  font-size: clamp(9px, 1.8vw, 12px);
-  letter-spacing: 2px;
-  color: #ffc9c9;
-  font-weight: bold;
-  animation: labelBlink 1.8s ease-in-out infinite;
-}
+        @keyframes teamBlink {
+            0%, 100% {
+                opacity: 0.65;
+            }
 
-@keyframes numberBlink {
-  0%, 100% {
-    opacity: 1;
-    color: #fff0b8;
-    text-shadow:
-      0 0 10px #ffd778,
-      0 0 24px rgba(255, 190, 60, .6);
-  }
+            50% {
+                opacity: 1;
+            }
+        }
 
-  50% {
-    opacity: .55;
-    color: #fff;
-    text-shadow:
-      0 0 4px #fff,
-      0 0 10px rgba(255, 48, 59, .4);
-  }
-}
+        /* TAMPILAN HP */
+        @media (max-width: 600px) {
+            .container {
+                gap: 24px;
+                padding: 30px 12px;
+            }
 
-@keyframes secondsBlink {
-  0%, 100% {
-    opacity: 1;
-    color: #fff;
-    text-shadow:
-      0 0 12px #ffd778,
-      0 0 28px #ff303b;
-  }
+            .main-title {
+                font-size: clamp(29px, 8vw, 46px);
+                letter-spacing: 1px;
+            }
 
-  50% {
-    opacity: .3;
-    color: #ff303b;
-    text-shadow: 0 0 5px #ff303b;
-  }
-}
+            .countdown {
+                gap: 9px;
+            }
 
-@keyframes labelBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .7; }
-}
+            .countdown-box {
+                min-width: 42%;
+                max-width: 160px;
+                padding: 17px 8px;
+            }
 
-@keyframes boxGlow {
-  0%, 100% {
-    border-color: rgba(255, 216, 120, .55);
-    box-shadow:
-      0 0 12px rgba(255, 181, 65, .10),
-      inset 0 0 10px rgba(255, 255, 255, .02);
-  }
+            .countdown-number {
+                font-size: 36px;
+            }
 
-  50% {
-    border-color: rgba(255, 48, 59, .8);
-    box-shadow:
-      0 0 18px rgba(255, 48, 59, .18),
-      inset 0 0 12px rgba(255, 216, 120, .04);
-  }
-}
+            .countdown-label {
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
 
-.target-date {
-  margin-top: 18px;
-  font-size: clamp(12px, 2.5vw, 16px);
-  color: #fff5e5;
-  text-shadow: 0 2px 8px #000;
-}
+            .team-title {
+                letter-spacing: 2px;
+            }
+        }
 
-.timezone {
-  margin-top: 7px;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: var(--gold);
-}
-
-/* TEAM ELITE FAMILY */
-.team-name {
-  margin-top: 32px;
-  font-size: clamp(22px, 5vw, 43px);
-  font-weight: 900;
-  letter-spacing: clamp(1px, .6vw, 5px);
-  line-height: 1.2;
-  background: linear-gradient(
-    90deg,
-    #ff303b,
-    #ffe7a0,
-    #ff303b,
-    #ffd778
-  );
-  background-size: 300% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  overflow-wrap: anywhere;
-  animation:
-    eliteBlink 1.4s ease-in-out infinite,
-    eliteShine 4s linear infinite;
-}
-
-@keyframes eliteBlink {
-  0%, 100% {
-    opacity: 1;
-    filter: drop-shadow(0 0 12px #ff303b);
-  }
-
-  50% {
-    opacity: .48;
-    filter: drop-shadow(0 0 25px #ffd778);
-  }
-}
-
-@keyframes eliteShine {
-  from { background-position: 0% center; }
-  to { background-position: 300% center; }
-}
-
-.team-caption {
-  margin-top: 8px;
-  font-size: 10px;
-  letter-spacing: 4px;
-  color: #fff0c9;
-  text-shadow: 0 2px 8px #000;
-}
-
-.footer {
-  margin-top: 26px;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, .9);
-  text-shadow: 0 2px 8px #000;
-}
-
-/* TAMPILAN HP */
-@media (max-width: 480px) {
-  .page {
-    padding: 25px 14px;
-  }
-
-  .eyebrow {
-    letter-spacing: 3px;
-  }
-
-  .moving-title h1 {
-    font-size: clamp(29px, 8vw, 42px);
-  }
-
-  .subtitle {
-    letter-spacing: 1.5px;
-  }
-
-  .countdown {
-    gap: 6px;
-  }
-
-  .time-box {
-    border-radius: 10px;
-    padding: 12px 2px;
-  }
-
-  .unit {
-    letter-spacing: 1px;
-  }
-
-  .team-name {
-    margin-top: 27px;
-    letter-spacing: 1px;
-  }
-}
-
-/* LAYAR PENDEK */
-@media (max-height: 650px) and (min-width: 481px) {
-  .page {
-    padding-top: 18px;
-    padding-bottom: 18px;
-  }
-
-  .team-name {
-    margin-top: 20px;
-  }
-
-  .footer {
-    margin-top: 14px;
-  }
-}
-
-/* AKSESIBILITAS */
-@media (prefers-reduced-motion: reduce) {
-  .moving-title h1,
-  .team-name,
-  .number,
-  #seconds,
-  .unit,
-  .time-box {
-    animation: none;
-  }
-
-  .moving-title {
-    white-space: normal;
-  }
-
-  .moving-title h1 {
-    padding-left: 0;
-  }
-}
-</style>
+        @media (prefers-reduced-motion: reduce) {
+            .main-title,
+            .countdown-box,
+            .countdown-number,
+            .team-title {
+                animation-duration: 4s;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="background"></div>
+    <div class="overlay"></div>
+    <canvas id="fireworks"></canvas>
 
-<div class="background" aria-hidden="true"></div>
-<canvas id="fireworks" aria-hidden="true"></canvas>
+    <main class="container">
+        <h1 class="main-title">HAPPY NEW YEAR 2027</h1>
 
-<main class="page">
+        <section class="countdown" aria-label="Hitung mundur tahun baru">
+            <div class="countdown-box">
+                <span class="countdown-number" id="days">000</span>
+                <span class="countdown-label">HARI</span>
+            </div>
 
-  <div class="eyebrow">A New Beginning</div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">JAM</span>
+            </div>
 
-  <div class="moving-title">
-    <h1>
-      HAPPY NEW YEAR <span class="year">2027</span>
-    </h1>
-  </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">MENIT</span>
+            </div>
 
-  <div class="subtitle">WELCOME TO THE NEW CHAPTER</div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">DETIK</span>
+            </div>
+        </section>
 
-  <section class="countdown" aria-label="Hitung mundur Tahun Baru">
-    <div class="time-box">
-      <span class="number" id="days">000</span>
-      <span class="unit">HARI</span>
-    </div>
+        <h2 class="team-title">TEAM ELITE FAMILY</h2>
+    </main>
 
-    <div class="time-box">
-      <span class="number" id="hours">00</span>
-      <span class="unit">JAM</span>
-    </div>
+    <script>
+        /* HITUNG MUNDUR MENUJU 1 JANUARI 2027 */
+        const targetDate = new Date("2027-01-01T00:00:00+07:00").getTime();
 
-    <div class="time-box">
-      <span class="number" id="minutes">00</span>
-      <span class="unit">MENIT</span>
-    </div>
+        function updateCountdown() {
+            const now = Date.now();
+            let distance = targetDate - now;
 
-    <div class="time-box">
-      <span class="number" id="seconds">00</span>
-      <span class="unit">DETIK</span>
-    </div>
-  </section>
+            if (distance < 0) {
+                distance = 0;
+            }
 
-  <div class="target-date">1 JANUARI 2027</div>
-  <div class="timezone">00:00 WIB · GMT+7</div>
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(
+                (distance % (1000 * 60 * 60 * 24)) /
+                (1000 * 60 * 60)
+            );
+            const minutes = Math.floor(
+                (distance % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            const seconds = Math.floor(
+                (distance % (1000 * 60)) / 1000
+            );
 
-  <div class="team-name">TEAM ELITE FAMILY</div>
-  <div class="team-caption">UNITED · STRONGER · FOREVER</div>
+            document.getElementById("days").textContent =
+                String(days).padStart(3, "0");
+            document.getElementById("hours").textContent =
+                String(hours).padStart(2, "0");
+            document.getElementById("minutes").textContent =
+                String(minutes).padStart(2, "0");
+            document.getElementById("seconds").textContent =
+                String(seconds).padStart(2, "0");
+        }
 
-  <div class="footer">✦ CELEBRATE THE MOMENT ✦</div>
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
 
-</main>
+        /* EFEK KEMBANG API */
+        const canvas = document.getElementById("fireworks");
+        const ctx = canvas.getContext("2d");
 
-<script>
-/* COUNTDOWN TAHUN BARU 2027 */
-const targetDate =
-  new Date("2027-01-01T00:00:00+07:00").getTime();
+        let width;
+        let height;
+        let particles = [];
+        let rockets = [];
 
-function updateCountdown() {
-  const now = Date.now();
-  let remaining = Math.max(0, targetDate - now);
+        function resizeCanvas() {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-  const days = Math.floor(remaining / 86400000);
-  remaining %= 86400000;
+            width = window.innerWidth;
+            height = window.innerHeight;
 
-  const hours = Math.floor(remaining / 3600000);
-  remaining %= 3600000;
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            canvas.style.width = width + "px";
+            canvas.style.height = height + "px";
 
-  const minutes = Math.floor(remaining / 60000);
-  const seconds = Math.floor((remaining % 60000) / 1000);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
 
-  document.getElementById("days").textContent =
-    String(days).padStart(3, "0");
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
 
-  document.getElementById("hours").textContent =
-    String(hours).padStart(2, "0");
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
 
-  document.getElementById("minutes").textContent =
-    String(minutes).padStart(2, "0");
+        function launchRocket() {
+            rockets.push({
+                x: random(width * 0.12, width * 0.88),
+                y: height + 5,
+                targetY: random(height * 0.12, height * 0.52),
+                speed: random(4, 7),
+                hue: random(0, 360),
+                trail: []
+            });
+        }
 
-  document.getElementById("seconds").textContent =
-    String(seconds).padStart(2, "0");
+        function explode(x, y, hue) {
+            const count = Math.floor(random(45, 85));
 
-  if (now >= targetDate) {
-    document.querySelector(".subtitle").textContent =
-      "WELCOME TO 2027!";
-  }
-}
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = random(1, 5.5);
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    alpha: 1,
+                    decay: random(0.009, 0.018),
+                    gravity: 0.035,
+                    size: random(1, 3),
+                    hue: hue + random(-25, 25)
+                });
+            }
+        }
 
-/* ANIMASI KEMBANG API */
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
+        function animateFireworks() {
+            ctx.clearRect(0, 0, width, height);
 
-let width = 0;
-let height = 0;
-let particles = [];
-let lastLaunch = 0;
-let nextLaunchDelay = 1200;
+            /* Roket meluncur */
+            for (let i = rockets.length - 1; i >= 0; i--) {
+                const rocket = rockets[i];
 
-function resizeCanvas() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                rocket.trail.push({ x: rocket.x, y: rocket.y });
 
-  width = window.innerWidth;
-  height = window.innerHeight;
+                if (rocket.trail.length > 7) {
+                    rocket.trail.shift();
+                }
 
-  canvas.width = Math.floor(width * dpr);
-  canvas.height = Math.floor(height * dpr);
+                for (let j = 0; j < rocket.trail.length; j++) {
+                    const point = rocket.trail[j];
 
-  canvas.style.width = width + "px";
-  canvas.style.height = height + "px";
+                    ctx.beginPath();
+                    ctx.arc(
+                        point.x,
+                        point.y,
+                        (j + 1) * 0.7,
+                        0,
+                        Math.PI * 2
+                    );
+                    ctx.fillStyle =
+                        `hsla(${rocket.hue}, 100%, 70%, ${j / 10})`;
+                    ctx.fill();
+                }
 
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-}
+                rocket.y -= rocket.speed;
 
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
+                ctx.beginPath();
+                ctx.arc(rocket.x, rocket.y, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = `hsl(${rocket.hue}, 100%, 70%)`;
+                ctx.fill();
 
-function launchFirework() {
-  const x = width * (0.12 + Math.random() * 0.76);
-  const y = height * (0.12 + Math.random() * 0.42);
-  const hue = Math.floor(Math.random() * 360);
-  const count = 35 + Math.floor(Math.random() * 25);
+                if (rocket.y <= rocket.targetY) {
+                    explode(rocket.x, rocket.y, rocket.hue);
+                    rockets.splice(i, 1);
+                }
+            }
 
-  for (let i = 0; i < count; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const speed = 1 + Math.random() * 4;
+            /* Partikel ledakan */
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
 
-    particles.push({
-      x,
-      y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-      life: 45 + Math.random() * 30,
-      maxLife: 75,
-      hue,
-      size: 1 + Math.random() * 2
-    });
-  }
-}
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += p.gravity;
+                p.vx *= 0.99;
+                p.vy *= 0.99;
+                p.alpha -= p.decay;
 
-function animateFireworks(timestamp) {
-  ctx.clearRect(0, 0, width, height);
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                    continue;
+                }
 
-  if (timestamp - lastLaunch > nextLaunchDelay) {
-    launchFirework();
-    lastLaunch = timestamp;
-    nextLaunchDelay = 1200 + Math.random() * 1000;
-  }
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle =
+                    `hsla(${p.hue}, 100%, 65%, ${p.alpha})`;
+                ctx.fill();
+            }
 
-  particles = particles.filter(p => p.life > 0);
+            requestAnimationFrame(animateFireworks);
+        }
 
-  for (const p of particles) {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += 0.035;
-    p.vx *= 0.99;
-    p.vy *= 0.99;
-    p.life--;
+        /* Peluncuran kembang api setiap 1,2–2,2 detik */
+        function scheduleRocket() {
+            launchRocket();
+            setTimeout(scheduleRocket, random(1200, 2200));
+        }
 
-    ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
-    ctx.fillStyle = `hsl(${p.hue}, 100%, 68%)`;
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  ctx.globalAlpha = 1;
-  requestAnimationFrame(animateFireworks);
-}
-
-requestAnimationFrame(animateFireworks);
-</script>
-
+        scheduleRocket();
+        animateFireworks();
+    </script>
 </body>
 </html>

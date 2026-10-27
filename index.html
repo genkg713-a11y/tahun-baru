@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEW YEAR 2027 — GENK</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;background:radial-gradient(circle at top,#35104f,#080817 65%);
+  color:#fff;font-family:Arial,sans-serif;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  overflow:hidden
+}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+.content{position:relative;z-index:1;padding:24px;width:100%}
+.tag{color:#ffd779;letter-spacing:7px;font-size:13px}
+h1{font-size:clamp(55px,12vw,115px);margin:18px 0;
+background:linear-gradient(#fff5bf,#ffba42,#fff0a0);
+-webkit-background-clip:text;color:transparent;text-shadow:0 0 35px #ffb52c55}
+h2{font-size:clamp(25px,5vw,42px);letter-spacing:9px;color:#ff404f;margin:0}
+p{color:#e8dff7;letter-spacing:2px}
+.timer{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:32px 0}
+.unit{background:#ffffff12;border:1px solid #ffcf7055;border-radius:15px;
+padding:18px 12px;min-width:85px;backdrop-filter:blur(8px)}
+.num{font-size:clamp(28px,5vw,42px);font-weight:bold;color:#ffd779}
+.label{font-size:10px;letter-spacing:2px;margin-top:8px;color:#ddd}
+#message{font-size:20px;color:#ffd779}
+footer{font-size:12px;color:#b9a8cc;margin-top:35px;letter-spacing:3px}
+</style>
+</head>
+<body>
+<canvas id="fireworks"></canvas>
+<div class="content">
+  <div class="tag">✦ THE GRAND CELEBRATION ✦</div>
+  <h1>HAPPY NEW YEAR</h1>
+  <h2>2027</h2>
+  <p>COUNTDOWN TO A NEW BEGINNING</p>
+  <div class="timer">
+    <div class="unit"><div class="num" id="days">0</div><div class="label">HARI</div></div>
+    <div class="unit"><div class="num" id="hours">00</div><div class="label">JAM</div></div>
+    <div class="unit"><div class="num" id="minutes">00</div><div class="label">MENIT</div></div>
+    <div class="unit"><div class="num" id="seconds">00</div><div class="label">DETIK</div></div>
+  </div>
+  <div id="message">Bersiap menyambut tahun baru!</div>
+  <footer>✦ GENK FAMILY ✦ WIB (UTC+7)</footer>
+</div>
+<script>
+const target = new Date("2027-01-01T00:00:00+07:00").getTime();
+function update(){
+  let diff=Math.max(0,target-Date.now());
+  document.getElementById("days").textContent=Math.floor(diff/86400000);
+  document.getElementById("hours").textContent=String(Math.floor(diff/3600000)%24).padStart(2,"0");
+  document.getElementById("minutes").textContent=String(Math.floor(diff/60000)%60).padStart(2,"0");
+  document.getElementById("seconds").textContent=String(Math.floor(diff/1000)%60).padStart(2,"0");
+  if(diff===0)document.getElementById("message").textContent="🎉 SELAMAT TAHUN BARU 2027! 🎉";
+}
+update();setInterval(update,1000);
+
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+let particles=[];
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+addEventListener("resize",resize);resize();
+function burst(){
+  const x=Math.random()*canvas.width;
+  const y=Math.random()*canvas.height*.65;
+  const hue=Math.random()*360;
+  for(let i=0;i<90;i++){
+    const a=Math.random()*Math.PI*2;
+    const speed=Math.random()*5+1;
+    particles.push({x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,
+      life:80+Math.random()*30,hue});
+  }
+}
+function animate(){
+  ctx.fillStyle="rgba(8,8,23,0.18)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];p.x+=p.vx;p.y+=p.vy;p.vy+=.035;p.life--;
+    ctx.globalAlpha=Math.max(0,p.life/100);
+    ctx.fillStyle=`hsl(${p.hue},100%,65%)`;
+    ctx.beginPath();ctx.arc(p.x,p.y,2,0,Math.PI*2);ctx.fill();
+    if(p.life<=0)particles.splice(i,1);
+  }
+  ctx.globalAlpha=1;
+  requestAnimationFrame(animate);
+}
+setInterval(burst,650);
+for(let i=0;i<5;i++)setTimeout(burst,i*300);
+animate();
+</script>
+</body>
+</html>

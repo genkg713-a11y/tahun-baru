@@ -33,7 +33,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* BACKGROUND GAMBAR */
+/* BACKGROUND */
 .background {
   position: fixed;
   inset: 0;
@@ -73,7 +73,7 @@ body {
   pointer-events: none;
 }
 
-/* KONTEN */
+/* KONTEN UTAMA */
 .page {
   position: relative;
   z-index: 2;
@@ -97,7 +97,7 @@ body {
   text-shadow: 0 0 14px rgba(255, 204, 95, .7);
 }
 
-/* JUDUL BERJALAN */
+/* HAPPY NEW YEAR - ELEGAN & LAMBAT */
 .moving-title {
   width: 100%;
   overflow: hidden;
@@ -109,27 +109,34 @@ body {
   display: inline-block;
   padding-left: 100%;
   margin: 0;
-  font-size: clamp(32px, 7vw, 76px);
-  line-height: 1.15;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 6.5vw, 72px);
+  line-height: 1.25;
   font-weight: 900;
-  letter-spacing: 2px;
+  letter-spacing: clamp(2px, .8vw, 7px);
   color: #fff4cb;
   text-shadow:
-    0 0 12px rgba(255, 202, 91, .6),
-    0 0 35px rgba(255, 53, 76, .5);
-  animation: newYearMove 14s linear infinite;
+    0 0 8px rgba(255, 215, 120, .75),
+    0 0 22px rgba(255, 180, 55, .5),
+    0 0 45px rgba(255, 48, 59, .25);
+  animation: newYearMove 30s linear infinite;
 }
 
 @keyframes newYearMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(-200%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200%);
+  }
 }
 
 .year {
   color: #ffd778;
   text-shadow:
-    0 0 14px rgba(255, 194, 73, .9),
-    0 0 32px rgba(255, 53, 76, .6);
+    0 0 10px rgba(255, 215, 120, .95),
+    0 0 25px rgba(255, 180, 55, .75),
+    0 0 45px rgba(255, 48, 59, .45);
 }
 
 .subtitle {
@@ -158,21 +165,17 @@ body {
     inset 0 0 16px rgba(255, 255, 255, .04);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-
-  /* KEDIP BINGKAI */
   animation: boxGlow 2s ease-in-out infinite;
 }
 
+/* ANGKA COUNTDOWN */
 .number {
   display: block;
   font-size: clamp(25px, 6vw, 49px);
   font-weight: 900;
   color: #fff0b8;
   font-variant-numeric: tabular-nums;
-  text-shadow:
-    0 0 14px rgba(255, 196, 82, .45);
-
-  /* KEDIP ANGKA */
+  text-shadow: 0 0 14px rgba(255, 196, 82, .45);
   animation: numberBlink 1.4s ease-in-out infinite;
 }
 
@@ -188,8 +191,6 @@ body {
   letter-spacing: 2px;
   color: #ffc9c9;
   font-weight: bold;
-
-  /* LABEL IKUT BERKEDIP */
   animation: labelBlink 1.8s ease-in-out infinite;
 }
 
@@ -204,9 +205,9 @@ body {
 
   50% {
     opacity: .55;
-    color: #ffffff;
+    color: #fff;
     text-shadow:
-      0 0 4px #ffffff,
+      0 0 4px #fff,
       0 0 10px rgba(255, 48, 59, .4);
   }
 }
@@ -214,7 +215,7 @@ body {
 @keyframes secondsBlink {
   0%, 100% {
     opacity: 1;
-    color: #ffffff;
+    color: #fff;
     text-shadow:
       0 0 12px #ffd778,
       0 0 28px #ff303b;
@@ -228,13 +229,8 @@ body {
 }
 
 @keyframes labelBlink {
-  0%, 100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: .7;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: .7; }
 }
 
 @keyframes boxGlow {
@@ -495,6 +491,7 @@ let width = 0;
 let height = 0;
 let particles = [];
 let lastLaunch = 0;
+let nextLaunchDelay = 1200;
 
 function resizeCanvas() {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -540,12 +537,10 @@ function launchFirework() {
 function animateFireworks(timestamp) {
   ctx.clearRect(0, 0, width, height);
 
-  if (
-    timestamp - lastLaunch >
-    950 + Math.random() * 800
-  ) {
+  if (timestamp - lastLaunch > nextLaunchDelay) {
     launchFirework();
     lastLaunch = timestamp;
+    nextLaunchDelay = 1200 + Math.random() * 1000;
   }
 
   particles = particles.filter(p => p.life > 0);

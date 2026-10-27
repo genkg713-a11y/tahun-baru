@@ -4,67 +4,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080817">
+<meta name="theme-color" content="#100719">
 <title>NEW YEAR 2027 — TEAM ELITE FAMILY</title>
 
 <style>
+:root {
+  --gold: #ffd778;
+  --red: #ff303b;
+  --white: #fff9ed;
+}
+
 * {
   box-sizing: border-box;
 }
 
-html {
+html, body {
+  width: 100%;
   min-height: 100%;
+  margin: 0;
 }
 
 body {
-  margin: 0;
   min-height: 100vh;
-  min-height: 100svh;
-  background: #080817;
-  color: white;
-  font-family: Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  min-height: 100dvh;
   overflow-x: hidden;
-  position: relative;
+  overflow-y: auto;
+  background: #100719;
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* BACKGROUND GAMBAR MILIK LU */
-body::before {
-  content: "";
+/* BACKGROUND GAMBAR: TIDAK DIPAKSA MEMENUHI LAYAR */
+.background {
   position: fixed;
   inset: 0;
   z-index: 0;
+  background-color: #100719;
   background-image:
     linear-gradient(
       180deg,
-      rgba(5, 5, 15, 0.30),
-      rgba(5, 5, 15, 0.58)
+      rgba(10, 3, 20, .28),
+      rgba(10, 3, 20, .48)
     ),
     url("https://s15.gifyu.com/images/bWmeJ.jpg");
-  background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover;
-  transform: scale(1.02);
+  background-position: center center;
+  background-size: contain;
+  pointer-events: none;
 }
 
-/* LAPISAN KILAU EMAS */
-body::after {
+.background::after {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: 0;
-  pointer-events: none;
   background:
     radial-gradient(
-      circle at 50% 35%,
-      transparent 10%,
-      rgba(255, 190, 65, 0.07) 100%
+      ellipse at center,
+      transparent 15%,
+      rgba(8, 3, 18, .32) 100%
     );
 }
 
+/* KEMBANG API */
 #fireworks {
   position: fixed;
   inset: 0;
@@ -74,199 +75,206 @@ body::after {
   pointer-events: none;
 }
 
-.content {
+/* KONTEN UTAMA */
+.page {
   position: relative;
   z-index: 2;
-  width: 100%;
-  max-width: 1100px;
-  padding: 35px 18px;
-  margin: auto;
-}
-
-.tag {
-  color: #ffe4a0;
-  font-size: clamp(10px, 2vw, 14px);
-  letter-spacing: clamp(3px, 0.8vw, 7px);
-  text-shadow: 0 0 15px #ffcc66;
-}
-
-h1 {
-  font-size: clamp(38px, 9vw, 95px);
-  line-height: 1.05;
-  margin: 24px 0 12px;
-  font-weight: 900;
-  background: linear-gradient(
-    180deg,
-    #fffde8 0%,
-    #ffe9a0 25%,
-    #ffc247 60%,
-    #fff4b0 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 18px #ffba4555);
-}
-
-h2 {
-  font-size: clamp(48px, 11vw, 100px);
-  line-height: 1;
-  margin: 12px 0 20px;
-  letter-spacing: clamp(5px, 2vw, 16px);
-  color: #ffdc86;
-  text-shadow:
-    0 0 12px #ffb32d,
-    0 0 35px #ff404f88;
-}
-
-.subtitle {
-  color: #fff2d0;
-  font-size: clamp(10px, 2vw, 14px);
-  letter-spacing: 3px;
-  text-shadow: 0 2px 10px #000;
-}
-
-.timer {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 32px 0;
-}
-
-.unit {
-  min-width: 85px;
-  padding: 18px 12px;
-  border-radius: 15px;
-  background: rgba(12, 10, 24, 0.55);
-  border: 1px solid rgba(255, 211, 115, 0.75);
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
-  box-shadow:
-    0 0 18px rgba(255, 190, 65, 0.12),
-    inset 0 0 15px rgba(255, 255, 255, 0.04);
-}
-
-.num {
-  color: #ffe39a;
-  font-size: clamp(28px, 5vw, 43px);
-  font-weight: 900;
-  text-shadow: 0 0 14px #ffbd45;
-  font-variant-numeric: tabular-nums;
-}
-
-.label {
-  font-size: 10px;
-  letter-spacing: 2px;
-  margin-top: 8px;
-  color: #fff1ce;
-}
-
-#message {
-  color: #ffe4a0;
-  font-size: clamp(14px, 3vw, 20px);
-  font-weight: bold;
-  text-shadow: 0 0 15px #ffba45;
-  margin-top: 18px;
-}
-
-/* TEAM ELITE FAMILY */
-footer {
-  margin-top: 40px;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 13px;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 18px;
 }
 
-.team-name {
-  max-width: 100%;
-  font-size: clamp(24px, 5.6vw, 49px);
-  font-weight: 900;
-  line-height: 1.25;
-  letter-spacing: clamp(1px, 0.6vw, 5px);
-  overflow-wrap: anywhere;
+.eyebrow {
+  color: var(--gold);
+  font-size: clamp(11px, 2vw, 14px);
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-shadow: 0 0 14px rgba(255, 204, 95, .7);
+}
 
+h1 {
+  margin: 0;
+  font-size: clamp(35px, 8vw, 82px);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #fff4cb;
+  text-shadow:
+    0 0 12px rgba(255, 202, 91, .6),
+    0 0 35px rgba(255, 53, 76, .4);
+}
+
+.year {
+  display: block;
+  margin-top: 4px;
+  font-size: clamp(48px, 12vw, 118px);
+  font-weight: 900;
+  line-height: 1;
   background: linear-gradient(
     180deg,
-    #fffde8 0%,
-    #ffe7a0 20%,
-    #ffbf45 42%,
-    #ff515b 65%,
-    #ffcf65 83%,
-    #fff5c4 100%
+    #fff8d9 0%,
+    #ffd66b 40%,
+    #ff8b39 70%,
+    #ff3548 100%
   );
-
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  filter: drop-shadow(0 0 18px rgba(255, 166, 59, .3));
+}
 
-  filter:
-    drop-shadow(0 0 5px #ffcc6688)
-    drop-shadow(0 0 17px #ff304f77);
+.subtitle {
+  margin: 18px 0 24px;
+  font-size: clamp(12px, 2.5vw, 17px);
+  letter-spacing: 3px;
+  color: #fff4e5;
+  text-shadow: 0 2px 8px #000;
+}
 
-  animation: eliteGlow 2.5s ease-in-out infinite alternate;
+/* HITUNG MUNDUR */
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(7px, 2vw, 16px);
+  width: min(100%, 600px);
+}
+
+.time-box {
+  padding: clamp(12px, 3vw, 22px) 5px;
+  border: 1px solid rgba(255, 216, 120, .65);
+  border-radius: 14px;
+  background: rgba(20, 7, 29, .67);
+  box-shadow:
+    0 0 18px rgba(255, 181, 65, .12),
+    inset 0 0 16px rgba(255, 255, 255, .04);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.number {
+  display: block;
+  font-size: clamp(25px, 6vw, 49px);
+  font-weight: 900;
+  color: #fff0b8;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 14px rgba(255, 196, 82, .45);
+}
+
+.unit {
+  display: block;
+  margin-top: 5px;
+  font-size: clamp(9px, 1.8vw, 12px);
+  letter-spacing: 2px;
+  color: #ffc9c9;
+  font-weight: bold;
+}
+
+.target-date {
+  margin-top: 18px;
+  font-size: clamp(12px, 2.5vw, 16px);
+  color: #fff5e5;
+  text-shadow: 0 2px 8px #000;
 }
 
 .timezone {
+  margin-top: 7px;
   font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+/* NAMA TEAM */
+.team-name {
+  margin-top: 32px;
+  font-size: clamp(22px, 5vw, 43px);
+  font-weight: 900;
+  letter-spacing: clamp(1px, .6vw, 5px);
+  line-height: 1.2;
+  background: linear-gradient(
+    90deg,
+    #ff4545,
+    #ffe19a,
+    #ff4545
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 9px rgba(255, 65, 65, .5));
+  overflow-wrap: anywhere;
+}
+
+.team-caption {
+  margin-top: 8px;
+  font-size: 10px;
   letter-spacing: 4px;
-  color: #ffedc0;
-  text-shadow: 0 0 12px #ffbd45;
+  color: #fff0c9;
 }
 
-@keyframes eliteGlow {
-  from {
-    filter:
-      drop-shadow(0 0 4px #ffcc6666)
-      drop-shadow(0 0 10px #ff304f44);
-  }
-  to {
-    filter:
-      drop-shadow(0 0 10px #ffdb8b)
-      drop-shadow(0 0 24px #ff304f99);
-  }
+.footer {
+  margin-top: 26px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, .8);
 }
 
-/* TAMPILAN HP */
+/* LAYAR HP */
 @media (max-width: 480px) {
-  .content {
-    padding: 28px 12px;
+  .page {
+    padding: 25px 14px;
   }
 
-  .timer {
-    gap: 8px;
-    margin: 25px 0;
+  .eyebrow {
+    letter-spacing: 3px;
+  }
+
+  .subtitle {
+    letter-spacing: 1.5px;
+  }
+
+  .countdown {
+    gap: 6px;
+  }
+
+  .time-box {
+    border-radius: 10px;
+    padding: 12px 2px;
   }
 
   .unit {
-    min-width: 68px;
-    padding: 13px 8px;
-    border-radius: 12px;
-  }
-
-  .label {
-    font-size: 9px;
     letter-spacing: 1px;
-  }
-
-  footer {
-    margin-top: 32px;
   }
 
   .team-name {
+    margin-top: 27px;
     letter-spacing: 1px;
   }
+}
 
-  .timezone {
-    font-size: 10px;
-    letter-spacing: 3px;
+@media (max-height: 650px) and (min-width: 481px) {
+  .page {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .team-name {
+    margin-top: 20px;
+  }
+
+  .footer {
+    margin-top: 14px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .team-name {
-    animation: none;
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
   }
 }
 </style>
@@ -274,101 +282,100 @@ footer {
 
 <body>
 
-<canvas id="fireworks"></canvas>
+<div class="background" aria-hidden="true"></div>
+<canvas id="fireworks" aria-hidden="true"></canvas>
 
-<main class="content">
+<main class="page">
+  <div class="eyebrow">A New Beginning</div>
 
-  <div class="tag">✦ THE GRAND CELEBRATION ✦</div>
+  <h1>
+    HAPPY NEW YEAR
+    <span class="year">2027</span>
+  </h1>
 
-  <h1>HAPPY NEW YEAR</h1>
+  <div class="subtitle">WELCOME TO THE NEW CHAPTER</div>
 
-  <h2>2027</h2>
-
-  <p class="subtitle">
-    COUNTDOWN TO A NEW BEGINNING
-  </p>
-
-  <section class="timer" aria-label="Countdown Tahun Baru">
-    <div class="unit">
-      <div class="num" id="days">0</div>
-      <div class="label">HARI</div>
+  <section class="countdown" aria-label="Hitung mundur Tahun Baru">
+    <div class="time-box">
+      <span class="number" id="days">000</span>
+      <span class="unit">HARI</span>
     </div>
-
-    <div class="unit">
-      <div class="num" id="hours">00</div>
-      <div class="label">JAM</div>
+    <div class="time-box">
+      <span class="number" id="hours">00</span>
+      <span class="unit">JAM</span>
     </div>
-
-    <div class="unit">
-      <div class="num" id="minutes">00</div>
-      <div class="label">MENIT</div>
+    <div class="time-box">
+      <span class="number" id="minutes">00</span>
+      <span class="unit">MENIT</span>
     </div>
-
-    <div class="unit">
-      <div class="num" id="seconds">00</div>
-      <div class="label">DETIK</div>
+    <div class="time-box">
+      <span class="number" id="seconds">00</span>
+      <span class="unit">DETIK</span>
     </div>
   </section>
 
-  <div id="message">
-    Bersiap menyambut tahun baru!
-  </div>
+  <div class="target-date">1 JANUARI 2027</div>
+  <div class="timezone">00:00 WIB · GMT+7</div>
 
-  <footer>
-    <div class="team-name">
-      ✦ TEAM ELITE FAMILY ✦
-    </div>
-    <div class="timezone">
-      WIB (UTC+7)
-    </div>
-  </footer>
+  <div class="team-name">TEAM ELITE FAMILY</div>
+  <div class="team-caption">UNITED · STRONGER · FOREVER</div>
 
+  <div class="footer">✦ CELEBRATE THE MOMENT ✦</div>
 </main>
 
 <script>
-/* COUNTDOWN TAHUN BARU WIB */
-const target =
-  new Date("2027-01-01T00:00:00+07:00").getTime();
+/* HITUNG MUNDUR KE 1 JANUARI 2027 PUKUL 00.00 WIB */
+const targetDate = new Date("2027-01-01T00:00:00+07:00").getTime();
 
 function updateCountdown() {
-  const diff = Math.max(0, target - Date.now());
+  const now = Date.now();
+  let remaining = Math.max(0, targetDate - now);
+
+  const days = Math.floor(remaining / 86400000);
+  remaining %= 86400000;
+
+  const hours = Math.floor(remaining / 3600000);
+  remaining %= 3600000;
+
+  const minutes = Math.floor(remaining / 60000);
+  const seconds = Math.floor((remaining % 60000) / 1000);
 
   document.getElementById("days").textContent =
-    Math.floor(diff / 86400000);
-
+    String(days).padStart(3, "0");
   document.getElementById("hours").textContent =
-    String(Math.floor(diff / 3600000) % 24).padStart(2, "0");
-
+    String(hours).padStart(2, "0");
   document.getElementById("minutes").textContent =
-    String(Math.floor(diff / 60000) % 60).padStart(2, "0");
-
+    String(minutes).padStart(2, "0");
   document.getElementById("seconds").textContent =
-    String(Math.floor(diff / 1000) % 60).padStart(2, "0");
+    String(seconds).padStart(2, "0");
 
-  if (diff === 0) {
-    document.getElementById("message").textContent =
-      "🎉 SELAMAT TAHUN BARU 2027! 🎉";
+  if (now >= targetDate) {
+    document.querySelector(".subtitle").textContent =
+      "WELCOME TO 2027!";
   }
 }
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-/* ANIMASI KEMBANG API */
+/* EFEK KEMBANG API */
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
+let width = 0;
+let height = 0;
 let particles = [];
-let lastTime = 0;
+let lastLaunch = 0;
 
 function resizeCanvas() {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
 
-  canvas.width = Math.floor(innerWidth * dpr);
-  canvas.height = Math.floor(innerHeight * dpr);
-
-  canvas.style.width = innerWidth + "px";
-  canvas.style.height = innerHeight + "px";
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = width + "px";
+  canvas.style.height = height + "px";
 
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
@@ -376,76 +383,59 @@ function resizeCanvas() {
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
-function burst() {
-  const x = Math.random() * innerWidth;
-  const y = Math.random() * innerHeight * 0.62;
-  const hue = [38, 45, 350, 0, 280][
-    Math.floor(Math.random() * 5)
-  ];
+function launchFirework() {
+  const x = width * (0.12 + Math.random() * 0.76);
+  const y = height * (0.12 + Math.random() * 0.42);
+  const hue = Math.floor(Math.random() * 360);
+  const count = 35 + Math.floor(Math.random() * 25);
 
-  for (let i = 0; i < 65; i++) {
+  for (let i = 0; i < count; i++) {
     const angle = Math.random() * Math.PI * 2;
-    const speed = Math.random() * 4 + 1;
+    const speed = 1 + Math.random() * 4;
 
     particles.push({
-      x,
-      y,
+      x: x,
+      y: y,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
-      life: 65 + Math.random() * 35,
-      maxLife: 100,
-      hue,
-      size: Math.random() * 1.8 + 1
+      life: 45 + Math.random() * 30,
+      maxLife: 75,
+      hue: hue,
+      size: 1 + Math.random() * 2
     });
   }
-
-  /* Batasi partikel agar tetap ringan */
-  if (particles.length > 1400) {
-    particles.splice(0, particles.length - 1400);
-  }
 }
 
-function animate(time) {
-  if (time - lastTime > 30) {
-    lastTime = time;
+function animateFireworks(timestamp) {
+  ctx.clearRect(0, 0, width, height);
 
-    /* Kanvas transparan agar gambar tetap terlihat */
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
-
-    for (let i = particles.length - 1; i >= 0; i--) {
-      const p = particles[i];
-
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vx *= 0.99;
-      p.vy += 0.035;
-      p.life--;
-
-      ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
-      ctx.fillStyle = `hsl(${p.hue}, 100%, 68%)`;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-
-      if (p.life <= 0) {
-        particles.splice(i, 1);
-      }
-    }
-
-    ctx.globalAlpha = 1;
+  if (timestamp - lastLaunch > 950 + Math.random() * 800) {
+    launchFirework();
+    lastLaunch = timestamp;
   }
 
-  requestAnimationFrame(animate);
+  particles = particles.filter(p => p.life > 0);
+
+  for (const p of particles) {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.035;
+    p.vx *= 0.99;
+    p.vy *= 0.99;
+    p.life--;
+
+    ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
+    ctx.fillStyle = "hsl(" + p.hue + ", 100%, 68%)";
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(animateFireworks);
 }
 
-setInterval(burst, 700);
-
-for (let i = 0; i < 5; i++) {
-  setTimeout(burst, i * 300);
-}
-
-requestAnimationFrame(animate);
+requestAnimationFrame(animateFireworks);
 </script>
 
 </body>

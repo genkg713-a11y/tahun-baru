@@ -22,29 +22,33 @@
             min-height: 100vh;
             overflow-x: hidden;
             font-family: Arial, sans-serif;
-            background: #100817;
             color: white;
+            background: #100817;
         }
 
-        /* BACKGROUND */
+        /* BACKGROUND GAMBAR */
         .background {
             position: fixed;
             inset: 0;
             z-index: -3;
             background-image: url("https://s15.gifyu.com/images/bWmeJ.jpg");
-            background-position: center;
-            background-size: cover;
             background-repeat: no-repeat;
+            background-position: center center;
+
+            /* Gambar tidak dipaksa memenuhi layar */
+            background-size: contain;
+            background-color: #100817;
         }
 
         .overlay {
             position: fixed;
             inset: 0;
             z-index: -2;
-            background: rgba(8, 3, 15, 0.12);
+            background: rgba(8, 3, 15, 0.08);
+            pointer-events: none;
         }
 
-        /* KEMBANG API */
+        /* CANVAS KEMBANG API */
         #fireworks {
             position: fixed;
             inset: 0;
@@ -54,8 +58,9 @@
             pointer-events: none;
         }
 
-        /* KONTEN UTAMA */
+        /* KONTEN */
         .container {
+            position: relative;
             min-height: 100vh;
             width: 100%;
             display: flex;
@@ -67,8 +72,9 @@
             gap: 28px;
         }
 
-        /* HAPPY NEW YEAR - DIAM, BERKEDIP, TRANSPARAN */
+        /* HAPPY NEW YEAR: DIAM DAN BERKEDIP */
         .main-title {
+            position: relative;
             width: 100%;
             font-family: Georgia, "Times New Roman", serif;
             font-size: clamp(32px, 6vw, 76px);
@@ -84,7 +90,7 @@
 
         @keyframes kedipNewYear {
             0%, 100% {
-                opacity: 0.58;
+                opacity: 0.60;
                 text-shadow:
                     0 0 5px rgba(255, 215, 0, 0.25),
                     0 0 10px rgba(255, 140, 0, 0.15);
@@ -118,9 +124,7 @@
             background: rgba(20, 7, 29, 0.20);
             backdrop-filter: blur(2px);
             -webkit-backdrop-filter: blur(2px);
-            box-shadow:
-                0 0 12px rgba(255, 180, 0, 0.15),
-                inset 0 0 10px rgba(255, 255, 255, 0.03);
+            box-shadow: 0 0 12px rgba(255, 180, 0, 0.15);
             animation: glowBox 3s ease-in-out infinite;
         }
 
@@ -132,9 +136,7 @@
 
             50% {
                 border-color: rgba(255, 215, 0, 0.9);
-                box-shadow:
-                    0 0 18px rgba(255, 180, 0, 0.35),
-                    inset 0 0 10px rgba(255, 255, 255, 0.06);
+                box-shadow: 0 0 18px rgba(255, 180, 0, 0.35);
             }
         }
 
@@ -188,8 +190,9 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: teamGradient 4s linear infinite,
-                       teamBlink 2s ease-in-out infinite;
+            animation:
+                teamGradient 4s linear infinite,
+                teamBlink 2s ease-in-out infinite;
             filter: drop-shadow(0 0 8px rgba(255, 180, 0, 0.4));
         }
 
@@ -248,15 +251,6 @@
                 letter-spacing: 2px;
             }
         }
-
-        @media (prefers-reduced-motion: reduce) {
-            .main-title,
-            .countdown-box,
-            .countdown-number,
-            .team-title {
-                animation-duration: 4s;
-            }
-        }
     </style>
 </head>
 
@@ -294,35 +288,41 @@
     </main>
 
     <script>
-        /* HITUNG MUNDUR MENUJU 1 JANUARI 2027 */
-        const targetDate = new Date("2027-01-01T00:00:00+07:00").getTime();
+        /* COUNTDOWN */
+        const targetDate = new Date(
+            "2027-01-01T00:00:00+07:00"
+        ).getTime();
 
         function updateCountdown() {
-            const now = Date.now();
-            let distance = targetDate - now;
+            let distance = Math.max(0, targetDate - Date.now());
 
-            if (distance < 0) {
-                distance = 0;
-            }
+            const days = Math.floor(
+                distance / (1000 * 60 * 60 * 24)
+            );
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor(
                 (distance % (1000 * 60 * 60 * 24)) /
                 (1000 * 60 * 60)
             );
+
             const minutes = Math.floor(
-                (distance % (1000 * 60 * 60)) / (1000 * 60)
+                (distance % (1000 * 60 * 60)) /
+                (1000 * 60)
             );
+
             const seconds = Math.floor(
                 (distance % (1000 * 60)) / 1000
             );
 
             document.getElementById("days").textContent =
                 String(days).padStart(3, "0");
+
             document.getElementById("hours").textContent =
                 String(hours).padStart(2, "0");
+
             document.getElementById("minutes").textContent =
                 String(minutes).padStart(2, "0");
+
             document.getElementById("seconds").textContent =
                 String(seconds).padStart(2, "0");
         }
@@ -330,12 +330,12 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        /* EFEK KEMBANG API */
+        /* KEMBANG API */
         const canvas = document.getElementById("fireworks");
         const ctx = canvas.getContext("2d");
 
-        let width;
-        let height;
+        let width = 0;
+        let height = 0;
         let particles = [];
         let rockets = [];
 
@@ -379,8 +379,8 @@
                 const speed = random(1, 5.5);
 
                 particles.push({
-                    x: x,
-                    y: y,
+                    x,
+                    y,
                     vx: Math.cos(angle) * speed,
                     vy: Math.sin(angle) * speed,
                     alpha: 1,
@@ -395,19 +395,19 @@
         function animateFireworks() {
             ctx.clearRect(0, 0, width, height);
 
-            /* Roket meluncur */
             for (let i = rockets.length - 1; i >= 0; i--) {
                 const rocket = rockets[i];
 
-                rocket.trail.push({ x: rocket.x, y: rocket.y });
+                rocket.trail.push({
+                    x: rocket.x,
+                    y: rocket.y
+                });
 
                 if (rocket.trail.length > 7) {
                     rocket.trail.shift();
                 }
 
-                for (let j = 0; j < rocket.trail.length; j++) {
-                    const point = rocket.trail[j];
-
+                rocket.trail.forEach((point, j) => {
                     ctx.beginPath();
                     ctx.arc(
                         point.x,
@@ -416,16 +416,18 @@
                         0,
                         Math.PI * 2
                     );
+
                     ctx.fillStyle =
-                        `hsla(${rocket.hue}, 100%, 70%, ${j / 10})`;
+                        `hsla(${rocket.hue},100%,70%,${j / 10})`;
+
                     ctx.fill();
-                }
+                });
 
                 rocket.y -= rocket.speed;
 
                 ctx.beginPath();
                 ctx.arc(rocket.x, rocket.y, 2.5, 0, Math.PI * 2);
-                ctx.fillStyle = `hsl(${rocket.hue}, 100%, 70%)`;
+                ctx.fillStyle = `hsl(${rocket.hue},100%,70%)`;
                 ctx.fill();
 
                 if (rocket.y <= rocket.targetY) {
@@ -434,7 +436,6 @@
                 }
             }
 
-            /* Partikel ledakan */
             for (let i = particles.length - 1; i >= 0; i--) {
                 const p = particles[i];
 
@@ -452,15 +453,16 @@
 
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+
                 ctx.fillStyle =
-                    `hsla(${p.hue}, 100%, 65%, ${p.alpha})`;
+                    `hsla(${p.hue},100%,65%,${p.alpha})`;
+
                 ctx.fill();
             }
 
             requestAnimationFrame(animateFireworks);
         }
 
-        /* Peluncuran kembang api setiap 1,2–2,2 detik */
         function scheduleRocket() {
             launchRocket();
             setTimeout(scheduleRocket, random(1200, 2200));

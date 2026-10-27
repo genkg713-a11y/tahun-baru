@@ -33,7 +33,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* BACKGROUND */
+/* BACKGROUND GAMBAR */
 .background {
   position: fixed;
   inset: 0;
@@ -42,8 +42,8 @@ body {
   background-image:
     linear-gradient(
       180deg,
-      rgba(10, 3, 20, .22),
-      rgba(10, 3, 20, .42)
+      rgba(10, 3, 20, .12),
+      rgba(10, 3, 20, .25)
     ),
     url("https://s15.gifyu.com/images/bWmeJ.jpg");
   background-repeat: no-repeat;
@@ -58,8 +58,8 @@ body {
   inset: 0;
   background: radial-gradient(
     ellipse at center,
-    transparent 20%,
-    rgba(8, 3, 18, .25) 100%
+    transparent 35%,
+    rgba(8, 3, 18, .15) 100%
   );
 }
 
@@ -97,7 +97,7 @@ body {
   text-shadow: 0 0 14px rgba(255, 204, 95, .7);
 }
 
-/* HAPPY NEW YEAR - ELEGAN & LAMBAT */
+/* HAPPY NEW YEAR - ELEGAN */
 .moving-title {
   width: 100%;
   overflow: hidden;
@@ -123,12 +123,8 @@ body {
 }
 
 @keyframes newYearMove {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-200%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-200%); }
 }
 
 .year {
@@ -155,16 +151,22 @@ body {
   width: min(100%, 600px);
 }
 
+/* KOLOM COUNTDOWN LEBIH TRANSPARAN */
 .time-box {
   padding: clamp(12px, 3vw, 22px) 5px;
-  border: 1px solid rgba(255, 216, 120, .65);
+  border: 1px solid rgba(255, 216, 120, .55);
   border-radius: 14px;
-  background: rgba(20, 7, 29, .72);
+
+  /* UBAH .28 MENJADI .15 JIKA INGIN LEBIH TRANSPARAN */
+  background: rgba(20, 7, 29, .28);
+
   box-shadow:
-    0 0 18px rgba(255, 181, 65, .12),
-    inset 0 0 16px rgba(255, 255, 255, .04);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+    0 0 14px rgba(255, 181, 65, .10),
+    inset 0 0 10px rgba(255, 255, 255, .03);
+
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+
   animation: boxGlow 2s ease-in-out infinite;
 }
 
@@ -235,17 +237,17 @@ body {
 
 @keyframes boxGlow {
   0%, 100% {
-    border-color: rgba(255, 216, 120, .65);
+    border-color: rgba(255, 216, 120, .55);
     box-shadow:
-      0 0 12px rgba(255, 181, 65, .12),
-      inset 0 0 12px rgba(255, 255, 255, .03);
+      0 0 12px rgba(255, 181, 65, .10),
+      inset 0 0 10px rgba(255, 255, 255, .02);
   }
 
   50% {
-    border-color: rgba(255, 48, 59, .9);
+    border-color: rgba(255, 48, 59, .8);
     box-shadow:
-      0 0 22px rgba(255, 48, 59, .28),
-      inset 0 0 16px rgba(255, 216, 120, .08);
+      0 0 18px rgba(255, 48, 59, .18),
+      inset 0 0 12px rgba(255, 216, 120, .04);
   }
 }
 

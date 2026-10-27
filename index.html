@@ -12,72 +12,118 @@
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
-  background: radial-gradient(circle at top, #35104f, #080817 65%);
-  color: #fff;
-  font-family: Arial, sans-serif;
   min-height: 100vh;
+  min-height: 100svh;
+  background: #080817;
+  color: white;
+  font-family: Arial, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow-x: hidden;
-  overflow-y: auto;
+  position: relative;
 }
 
-canvas {
+/* BACKGROUND GAMBAR MILIK LU */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 15, 0.30),
+      rgba(5, 5, 15, 0.58)
+    ),
+    url("https://s15.gifyu.com/images/bWmeJ.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(1.02);
+}
+
+/* LAPISAN KILAU EMAS */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      transparent 10%,
+      rgba(255, 190, 65, 0.07) 100%
+    );
+}
+
+#fireworks {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
 .content {
   position: relative;
-  z-index: 1;
-  padding: 24px 16px;
+  z-index: 2;
   width: 100%;
   max-width: 1100px;
+  padding: 35px 18px;
   margin: auto;
 }
 
 .tag {
-  color: #ffd779;
-  letter-spacing: 7px;
-  font-size: 13px;
+  color: #ffe4a0;
+  font-size: clamp(10px, 2vw, 14px);
+  letter-spacing: clamp(3px, 0.8vw, 7px);
+  text-shadow: 0 0 15px #ffcc66;
 }
 
 h1 {
-  font-size: clamp(42px, 10vw, 100px);
-  margin: 18px 0;
+  font-size: clamp(38px, 9vw, 95px);
+  line-height: 1.05;
+  margin: 24px 0 12px;
+  font-weight: 900;
   background: linear-gradient(
     180deg,
     #fffde8 0%,
-    #ffdf75 35%,
-    #ffad32 65%,
-    #fff0a0 100%
+    #ffe9a0 25%,
+    #ffc247 60%,
+    #fff4b0 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 18px #ffb52c55);
+  filter: drop-shadow(0 0 18px #ffba4555);
 }
 
 h2 {
-  font-size: clamp(35px, 7vw, 65px);
-  letter-spacing: 12px;
-  color: #ff404f;
-  margin: 0;
-  text-shadow: 0 0 25px #ff304f66;
+  font-size: clamp(48px, 11vw, 100px);
+  line-height: 1;
+  margin: 12px 0 20px;
+  letter-spacing: clamp(5px, 2vw, 16px);
+  color: #ffdc86;
+  text-shadow:
+    0 0 12px #ffb32d,
+    0 0 35px #ff404f88;
 }
 
-p {
-  color: #e8dff7;
-  letter-spacing: 2px;
-  font-size: clamp(11px, 2vw, 15px);
+.subtitle {
+  color: #fff2d0;
+  font-size: clamp(10px, 2vw, 14px);
+  letter-spacing: 3px;
+  text-shadow: 0 2px 10px #000;
 }
 
 .timer {
@@ -89,61 +135,66 @@ p {
 }
 
 .unit {
-  background: #ffffff12;
-  border: 1px solid #ffcf7055;
-  border-radius: 15px;
-  padding: 18px 12px;
   min-width: 85px;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 20px #ffcf7010;
+  padding: 18px 12px;
+  border-radius: 15px;
+  background: rgba(12, 10, 24, 0.55);
+  border: 1px solid rgba(255, 211, 115, 0.75);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  box-shadow:
+    0 0 18px rgba(255, 190, 65, 0.12),
+    inset 0 0 15px rgba(255, 255, 255, 0.04);
 }
 
 .num {
-  font-size: clamp(28px, 5vw, 42px);
-  font-weight: bold;
-  color: #ffd779;
-  text-shadow: 0 0 15px #ffbf4766;
+  color: #ffe39a;
+  font-size: clamp(28px, 5vw, 43px);
+  font-weight: 900;
+  text-shadow: 0 0 14px #ffbd45;
+  font-variant-numeric: tabular-nums;
 }
 
 .label {
   font-size: 10px;
   letter-spacing: 2px;
   margin-top: 8px;
-  color: #ddd;
+  color: #fff1ce;
 }
 
 #message {
-  font-size: clamp(15px, 3vw, 20px);
-  color: #ffd779;
-  margin-top: 20px;
+  color: #ffe4a0;
+  font-size: clamp(14px, 3vw, 20px);
+  font-weight: bold;
+  text-shadow: 0 0 15px #ffba45;
+  margin-top: 18px;
 }
 
-/* TEAM ELITE FAMILY - DESAIN PREMIUM */
+/* TEAM ELITE FAMILY */
 footer {
-  margin-top: 38px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
 }
 
 .team-name {
-  display: inline-block;
   max-width: 100%;
-  font-size: clamp(25px, 5.5vw, 48px);
+  font-size: clamp(24px, 5.6vw, 49px);
   font-weight: 900;
-  line-height: 1.2;
-  letter-spacing: clamp(1px, 0.7vw, 6px);
-  text-transform: uppercase;
+  line-height: 1.25;
+  letter-spacing: clamp(1px, 0.6vw, 5px);
+  overflow-wrap: anywhere;
 
   background: linear-gradient(
     180deg,
-    #fffde5 0%,
-    #ffe9a0 18%,
-    #ffc447 42%,
-    #ff454f 68%,
-    #ffb94a 85%,
-    #fff1b3 100%
+    #fffde8 0%,
+    #ffe7a0 20%,
+    #ffbf45 42%,
+    #ff515b 65%,
+    #ffcf65 83%,
+    #fff5c4 100%
   );
 
   -webkit-background-clip: text;
@@ -151,55 +202,56 @@ footer {
   color: transparent;
 
   filter:
-    drop-shadow(0 0 5px #ffcc5555)
-    drop-shadow(0 0 16px #ff304f55);
+    drop-shadow(0 0 5px #ffcc6688)
+    drop-shadow(0 0 17px #ff304f77);
 
-  animation: eliteGlow 3s ease-in-out infinite alternate;
+  animation: eliteGlow 2.5s ease-in-out infinite alternate;
 }
 
 .timezone {
   font-size: 12px;
-  color: #f1dca9;
   letter-spacing: 4px;
-  text-shadow: 0 0 12px #ffcf7044;
+  color: #ffedc0;
+  text-shadow: 0 0 12px #ffbd45;
 }
 
 @keyframes eliteGlow {
   from {
     filter:
-      drop-shadow(0 0 4px #ffcc5544)
-      drop-shadow(0 0 10px #ff304f33);
+      drop-shadow(0 0 4px #ffcc6666)
+      drop-shadow(0 0 10px #ff304f44);
   }
   to {
     filter:
-      drop-shadow(0 0 9px #ffcc5599)
-      drop-shadow(0 0 22px #ff304f77);
+      drop-shadow(0 0 10px #ffdb8b)
+      drop-shadow(0 0 24px #ff304f99);
   }
 }
 
+/* TAMPILAN HP */
 @media (max-width: 480px) {
   .content {
     padding: 28px 12px;
   }
 
-  .tag {
-    font-size: 10px;
-    letter-spacing: 4px;
-  }
-
   .timer {
     gap: 8px;
-    margin: 24px 0;
+    margin: 25px 0;
   }
 
   .unit {
-    min-width: 70px;
-    padding: 14px 9px;
+    min-width: 68px;
+    padding: 13px 8px;
     border-radius: 12px;
   }
 
+  .label {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
   footer {
-    margin-top: 30px;
+    margin-top: 32px;
   }
 
   .team-name {
@@ -224,7 +276,7 @@ footer {
 
 <canvas id="fireworks"></canvas>
 
-<div class="content">
+<main class="content">
 
   <div class="tag">✦ THE GRAND CELEBRATION ✦</div>
 
@@ -232,9 +284,11 @@ footer {
 
   <h2>2027</h2>
 
-  <p>COUNTDOWN TO A NEW BEGINNING</p>
+  <p class="subtitle">
+    COUNTDOWN TO A NEW BEGINNING
+  </p>
 
-  <div class="timer">
+  <section class="timer" aria-label="Countdown Tahun Baru">
     <div class="unit">
       <div class="num" id="days">0</div>
       <div class="label">HARI</div>
@@ -254,22 +308,30 @@ footer {
       <div class="num" id="seconds">00</div>
       <div class="label">DETIK</div>
     </div>
+  </section>
+
+  <div id="message">
+    Bersiap menyambut tahun baru!
   </div>
 
-  <div id="message">Bersiap menyambut tahun baru!</div>
-
   <footer>
-    <div class="team-name">✦ TEAM ELITE FAMILY ✦</div>
-    <div class="timezone">WIB (UTC+7)</div>
+    <div class="team-name">
+      ✦ TEAM ELITE FAMILY ✦
+    </div>
+    <div class="timezone">
+      WIB (UTC+7)
+    </div>
   </footer>
 
-</div>
+</main>
 
 <script>
-const target = new Date("2027-01-01T00:00:00+07:00").getTime();
+/* COUNTDOWN TAHUN BARU WIB */
+const target =
+  new Date("2027-01-01T00:00:00+07:00").getTime();
 
-function update() {
-  let diff = Math.max(0, target - Date.now());
+function updateCountdown() {
+  const diff = Math.max(0, target - Date.now());
 
   document.getElementById("days").textContent =
     Math.floor(diff / 86400000);
@@ -289,15 +351,17 @@ function update() {
   }
 }
 
-update();
-setInterval(update, 1000);
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
+/* ANIMASI KEMBANG API */
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
 let particles = [];
+let lastTime = 0;
 
-function resize() {
+function resizeCanvas() {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
   canvas.width = Math.floor(innerWidth * dpr);
@@ -309,65 +373,79 @@ function resize() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
-addEventListener("resize", resize);
-resize();
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
 
 function burst() {
   const x = Math.random() * innerWidth;
-  const y = Math.random() * innerHeight * 0.65;
-  const hue = Math.random() * 360;
+  const y = Math.random() * innerHeight * 0.62;
+  const hue = [38, 45, 350, 0, 280][
+    Math.floor(Math.random() * 5)
+  ];
 
-  for (let i = 0; i < 90; i++) {
-    const a = Math.random() * Math.PI * 2;
-    const speed = Math.random() * 5 + 1;
+  for (let i = 0; i < 65; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 4 + 1;
 
     particles.push({
       x,
       y,
-      vx: Math.cos(a) * speed,
-      vy: Math.sin(a) * speed,
-      life: 80 + Math.random() * 30,
-      maxLife: 110,
-      hue
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      life: 65 + Math.random() * 35,
+      maxLife: 100,
+      hue,
+      size: Math.random() * 1.8 + 1
     });
+  }
+
+  /* Batasi partikel agar tetap ringan */
+  if (particles.length > 1400) {
+    particles.splice(0, particles.length - 1400);
   }
 }
 
-function animate() {
-  ctx.fillStyle = "rgba(8,8,23,0.18)";
-  ctx.fillRect(0, 0, innerWidth, innerHeight);
+function animate(time) {
+  if (time - lastTime > 30) {
+    lastTime = time;
 
-  for (let i = particles.length - 1; i >= 0; i--) {
-    const p = particles[i];
+    /* Kanvas transparan agar gambar tetap terlihat */
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
 
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += 0.035;
-    p.life--;
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
 
-    ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
-    ctx.fillStyle = `hsl(${p.hue},100%,65%)`;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vx *= 0.99;
+      p.vy += 0.035;
+      p.life--;
 
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-    ctx.fill();
+      ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
+      ctx.fillStyle = `hsl(${p.hue}, 100%, 68%)`;
 
-    if (p.life <= 0) {
-      particles.splice(i, 1);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+      }
     }
+
+    ctx.globalAlpha = 1;
   }
 
-  ctx.globalAlpha = 1;
   requestAnimationFrame(animate);
 }
 
-setInterval(burst, 650);
+setInterval(burst, 700);
 
 for (let i = 0; i < 5; i++) {
   setTimeout(burst, i * 300);
 }
 
-animate();
+requestAnimationFrame(animate);
 </script>
 
 </body>

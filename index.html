@@ -121,12 +121,8 @@ body {
 }
 
 @keyframes newYearMove {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-200%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-200%); }
 }
 
 .year {
@@ -162,6 +158,9 @@ body {
     inset 0 0 16px rgba(255, 255, 255, .04);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+
+  /* KEDIP BINGKAI */
+  animation: boxGlow 2s ease-in-out infinite;
 }
 
 .number {
@@ -170,7 +169,16 @@ body {
   font-weight: 900;
   color: #fff0b8;
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 14px rgba(255, 196, 82, .45);
+  text-shadow:
+    0 0 14px rgba(255, 196, 82, .45);
+
+  /* KEDIP ANGKA */
+  animation: numberBlink 1.4s ease-in-out infinite;
+}
+
+/* DETIK BERKEDIP LEBIH CEPAT */
+#seconds {
+  animation: secondsBlink .65s ease-in-out infinite;
 }
 
 .unit {
@@ -180,6 +188,69 @@ body {
   letter-spacing: 2px;
   color: #ffc9c9;
   font-weight: bold;
+
+  /* LABEL IKUT BERKEDIP */
+  animation: labelBlink 1.8s ease-in-out infinite;
+}
+
+@keyframes numberBlink {
+  0%, 100% {
+    opacity: 1;
+    color: #fff0b8;
+    text-shadow:
+      0 0 10px #ffd778,
+      0 0 24px rgba(255, 190, 60, .6);
+  }
+
+  50% {
+    opacity: .55;
+    color: #ffffff;
+    text-shadow:
+      0 0 4px #ffffff,
+      0 0 10px rgba(255, 48, 59, .4);
+  }
+}
+
+@keyframes secondsBlink {
+  0%, 100% {
+    opacity: 1;
+    color: #ffffff;
+    text-shadow:
+      0 0 12px #ffd778,
+      0 0 28px #ff303b;
+  }
+
+  50% {
+    opacity: .3;
+    color: #ff303b;
+    text-shadow: 0 0 5px #ff303b;
+  }
+}
+
+@keyframes labelBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .7;
+  }
+}
+
+@keyframes boxGlow {
+  0%, 100% {
+    border-color: rgba(255, 216, 120, .65);
+    box-shadow:
+      0 0 12px rgba(255, 181, 65, .12),
+      inset 0 0 12px rgba(255, 255, 255, .03);
+  }
+
+  50% {
+    border-color: rgba(255, 48, 59, .9);
+    box-shadow:
+      0 0 22px rgba(255, 48, 59, .28),
+      inset 0 0 16px rgba(255, 216, 120, .08);
+  }
 }
 
 .target-date {
@@ -196,7 +267,7 @@ body {
   color: var(--gold);
 }
 
-/* TEAM ELITE FAMILY BERKEDIP */
+/* TEAM ELITE FAMILY */
 .team-name {
   margin-top: 32px;
   font-size: clamp(22px, 5vw, 43px);
@@ -233,13 +304,8 @@ body {
 }
 
 @keyframes eliteShine {
-  from {
-    background-position: 0% center;
-  }
-
-  to {
-    background-position: 300% center;
-  }
+  from { background-position: 0% center; }
+  to { background-position: 300% center; }
 }
 
 .team-caption {
@@ -314,7 +380,11 @@ body {
 /* AKSESIBILITAS */
 @media (prefers-reduced-motion: reduce) {
   .moving-title h1,
-  .team-name {
+  .team-name,
+  .number,
+  #seconds,
+  .unit,
+  .time-box {
     animation: none;
   }
 

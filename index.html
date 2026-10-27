@@ -34,8 +34,6 @@
             background-image: url("https://s15.gifyu.com/images/bWmeJ.jpg");
             background-repeat: no-repeat;
             background-position: center center;
-
-            /* Gambar tidak dipaksa memenuhi layar */
             background-size: contain;
             background-color: #100817;
         }
@@ -48,7 +46,7 @@
             pointer-events: none;
         }
 
-        /* CANVAS KEMBANG API */
+        /* KEMBANG API */
         #fireworks {
             position: fixed;
             inset: 0;
@@ -58,7 +56,7 @@
             pointer-events: none;
         }
 
-        /* KONTEN */
+        /* KONTEN UTAMA */
         .container {
             position: relative;
             min-height: 100vh;
@@ -72,19 +70,23 @@
             gap: 28px;
         }
 
-        /* HAPPY NEW YEAR: DIAM DAN BERKEDIP */
+        /* HAPPY NEW YEAR */
         .main-title {
             position: relative;
             width: 100%;
+            max-width: 100%;
+            padding: 0 8px;
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(32px, 6vw, 76px);
+            font-size: clamp(22px, 4.5vw, 54px);
             font-weight: 900;
-            line-height: 1.2;
-            letter-spacing: 2px;
+            font-style: italic;
+            line-height: 1.3;
+            letter-spacing: 1px;
             color: rgba(255, 215, 0, 0.85);
             text-shadow:
                 0 0 8px rgba(255, 215, 0, 0.6),
                 0 0 20px rgba(255, 140, 0, 0.4);
+            overflow-wrap: anywhere;
             animation: kedipNewYear 2.5s ease-in-out infinite;
         }
 
@@ -100,8 +102,7 @@
                 opacity: 1;
                 text-shadow:
                     0 0 12px rgba(255, 215, 0, 0.95),
-                    0 0 28px rgba(255, 140, 0, 0.8),
-                    0 0 45px rgba(255, 80, 0, 0.4);
+                    0 0 28px rgba(255, 140, 0, 0.8);
             }
         }
 
@@ -224,8 +225,9 @@
             }
 
             .main-title {
-                font-size: clamp(29px, 8vw, 46px);
-                letter-spacing: 1px;
+                font-size: clamp(20px, 5.5vw, 32px);
+                letter-spacing: 0.5px;
+                padding: 0 4px;
             }
 
             .countdown {
@@ -288,13 +290,13 @@
     </main>
 
     <script>
-        /* COUNTDOWN */
+        /* COUNTDOWN TAHUN BARU */
         const targetDate = new Date(
             "2027-01-01T00:00:00+07:00"
         ).getTime();
 
         function updateCountdown() {
-            let distance = Math.max(0, targetDate - Date.now());
+            const distance = Math.max(0, targetDate - Date.now());
 
             const days = Math.floor(
                 distance / (1000 * 60 * 60 * 24)
@@ -330,7 +332,7 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        /* KEMBANG API */
+        /* ANIMASI KEMBANG API */
         const canvas = document.getElementById("fireworks");
         const ctx = canvas.getContext("2d");
 
@@ -379,8 +381,8 @@
                 const speed = random(1, 5.5);
 
                 particles.push({
-                    x,
-                    y,
+                    x: x,
+                    y: y,
                     vx: Math.cos(angle) * speed,
                     vy: Math.sin(angle) * speed,
                     alpha: 1,
@@ -453,10 +455,8 @@
 
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-
                 ctx.fillStyle =
                     `hsla(${p.hue},100%,65%,${p.alpha})`;
-
                 ctx.fill();
             }
 

@@ -28,13 +28,12 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
-  overflow-y: auto;
   background: #100719;
   color: var(--white);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* BACKGROUND GAMBAR: TIDAK DIPAKSA MEMENUHI LAYAR */
+/* BACKGROUND GAMBAR */
 .background {
   position: fixed;
   inset: 0;
@@ -43,8 +42,8 @@ body {
   background-image:
     linear-gradient(
       180deg,
-      rgba(10, 3, 20, .28),
-      rgba(10, 3, 20, .48)
+      rgba(10, 3, 20, .22),
+      rgba(10, 3, 20, .42)
     ),
     url("https://s15.gifyu.com/images/bWmeJ.jpg");
   background-repeat: no-repeat;
@@ -57,12 +56,11 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 15%,
-      rgba(8, 3, 18, .32) 100%
-    );
+  background: radial-gradient(
+    ellipse at center,
+    transparent 20%,
+    rgba(8, 3, 18, .25) 100%
+  );
 }
 
 /* KEMBANG API */
@@ -75,7 +73,7 @@ body {
   pointer-events: none;
 }
 
-/* KONTEN UTAMA */
+/* KONTEN */
 .page {
   position: relative;
   z-index: 2;
@@ -95,39 +93,47 @@ body {
   font-weight: bold;
   letter-spacing: 5px;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   text-shadow: 0 0 14px rgba(255, 204, 95, .7);
 }
 
-h1 {
+/* JUDUL BERJALAN */
+.moving-title {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 auto;
+}
+
+.moving-title h1 {
+  display: inline-block;
+  padding-left: 100%;
   margin: 0;
-  font-size: clamp(35px, 8vw, 82px);
-  line-height: 1.05;
+  font-size: clamp(32px, 7vw, 76px);
+  line-height: 1.15;
   font-weight: 900;
   letter-spacing: 2px;
   color: #fff4cb;
   text-shadow:
     0 0 12px rgba(255, 202, 91, .6),
-    0 0 35px rgba(255, 53, 76, .4);
+    0 0 35px rgba(255, 53, 76, .5);
+  animation: newYearMove 14s linear infinite;
+}
+
+@keyframes newYearMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200%);
+  }
 }
 
 .year {
-  display: block;
-  margin-top: 4px;
-  font-size: clamp(48px, 12vw, 118px);
-  font-weight: 900;
-  line-height: 1;
-  background: linear-gradient(
-    180deg,
-    #fff8d9 0%,
-    #ffd66b 40%,
-    #ff8b39 70%,
-    #ff3548 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 18px rgba(255, 166, 59, .3));
+  color: #ffd778;
+  text-shadow:
+    0 0 14px rgba(255, 194, 73, .9),
+    0 0 32px rgba(255, 53, 76, .6);
 }
 
 .subtitle {
@@ -138,7 +144,7 @@ h1 {
   text-shadow: 0 2px 8px #000;
 }
 
-/* HITUNG MUNDUR */
+/* COUNTDOWN */
 .countdown {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -150,7 +156,7 @@ h1 {
   padding: clamp(12px, 3vw, 22px) 5px;
   border: 1px solid rgba(255, 216, 120, .65);
   border-radius: 14px;
-  background: rgba(20, 7, 29, .67);
+  background: rgba(20, 7, 29, .72);
   box-shadow:
     0 0 18px rgba(255, 181, 65, .12),
     inset 0 0 16px rgba(255, 255, 255, .04);
@@ -190,7 +196,7 @@ h1 {
   color: var(--gold);
 }
 
-/* NAMA TEAM */
+/* TEAM ELITE FAMILY BERKEDIP */
 .team-name {
   margin-top: 32px;
   font-size: clamp(22px, 5vw, 43px);
@@ -199,15 +205,41 @@ h1 {
   line-height: 1.2;
   background: linear-gradient(
     90deg,
-    #ff4545,
-    #ffe19a,
-    #ff4545
+    #ff303b,
+    #ffe7a0,
+    #ff303b,
+    #ffd778
   );
+  background-size: 300% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 9px rgba(255, 65, 65, .5));
   overflow-wrap: anywhere;
+  animation:
+    eliteBlink 1.4s ease-in-out infinite,
+    eliteShine 4s linear infinite;
+}
+
+@keyframes eliteBlink {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px #ff303b);
+  }
+
+  50% {
+    opacity: .48;
+    filter: drop-shadow(0 0 25px #ffd778);
+  }
+}
+
+@keyframes eliteShine {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: 300% center;
+  }
 }
 
 .team-caption {
@@ -215,16 +247,18 @@ h1 {
   font-size: 10px;
   letter-spacing: 4px;
   color: #fff0c9;
+  text-shadow: 0 2px 8px #000;
 }
 
 .footer {
   margin-top: 26px;
   font-size: 10px;
   letter-spacing: 2px;
-  color: rgba(255, 255, 255, .8);
+  color: rgba(255, 255, 255, .9);
+  text-shadow: 0 2px 8px #000;
 }
 
-/* LAYAR HP */
+/* TAMPILAN HP */
 @media (max-width: 480px) {
   .page {
     padding: 25px 14px;
@@ -232,6 +266,10 @@ h1 {
 
   .eyebrow {
     letter-spacing: 3px;
+  }
+
+  .moving-title h1 {
+    font-size: clamp(29px, 8vw, 42px);
   }
 
   .subtitle {
@@ -257,6 +295,7 @@ h1 {
   }
 }
 
+/* LAYAR PENDEK */
 @media (max-height: 650px) and (min-width: 481px) {
   .page {
     padding-top: 18px;
@@ -272,9 +311,19 @@ h1 {
   }
 }
 
+/* AKSESIBILITAS */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
+  .moving-title h1,
+  .team-name {
+    animation: none;
+  }
+
+  .moving-title {
+    white-space: normal;
+  }
+
+  .moving-title h1 {
+    padding-left: 0;
   }
 }
 </style>
@@ -286,12 +335,14 @@ h1 {
 <canvas id="fireworks" aria-hidden="true"></canvas>
 
 <main class="page">
+
   <div class="eyebrow">A New Beginning</div>
 
-  <h1>
-    HAPPY NEW YEAR
-    <span class="year">2027</span>
-  </h1>
+  <div class="moving-title">
+    <h1>
+      HAPPY NEW YEAR <span class="year">2027</span>
+    </h1>
+  </div>
 
   <div class="subtitle">WELCOME TO THE NEW CHAPTER</div>
 
@@ -300,14 +351,17 @@ h1 {
       <span class="number" id="days">000</span>
       <span class="unit">HARI</span>
     </div>
+
     <div class="time-box">
       <span class="number" id="hours">00</span>
       <span class="unit">JAM</span>
     </div>
+
     <div class="time-box">
       <span class="number" id="minutes">00</span>
       <span class="unit">MENIT</span>
     </div>
+
     <div class="time-box">
       <span class="number" id="seconds">00</span>
       <span class="unit">DETIK</span>
@@ -321,11 +375,13 @@ h1 {
   <div class="team-caption">UNITED · STRONGER · FOREVER</div>
 
   <div class="footer">✦ CELEBRATE THE MOMENT ✦</div>
+
 </main>
 
 <script>
-/* HITUNG MUNDUR KE 1 JANUARI 2027 PUKUL 00.00 WIB */
-const targetDate = new Date("2027-01-01T00:00:00+07:00").getTime();
+/* COUNTDOWN TAHUN BARU 2027 */
+const targetDate =
+  new Date("2027-01-01T00:00:00+07:00").getTime();
 
 function updateCountdown() {
   const now = Date.now();
@@ -342,10 +398,13 @@ function updateCountdown() {
 
   document.getElementById("days").textContent =
     String(days).padStart(3, "0");
+
   document.getElementById("hours").textContent =
     String(hours).padStart(2, "0");
+
   document.getElementById("minutes").textContent =
     String(minutes).padStart(2, "0");
+
   document.getElementById("seconds").textContent =
     String(seconds).padStart(2, "0");
 
@@ -358,7 +417,7 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-/* EFEK KEMBANG API */
+/* ANIMASI KEMBANG API */
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
@@ -369,11 +428,13 @@ let lastLaunch = 0;
 
 function resizeCanvas() {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
   width = window.innerWidth;
   height = window.innerHeight;
 
   canvas.width = Math.floor(width * dpr);
   canvas.height = Math.floor(height * dpr);
+
   canvas.style.width = width + "px";
   canvas.style.height = height + "px";
 
@@ -394,13 +455,13 @@ function launchFirework() {
     const speed = 1 + Math.random() * 4;
 
     particles.push({
-      x: x,
-      y: y,
+      x,
+      y,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       life: 45 + Math.random() * 30,
       maxLife: 75,
-      hue: hue,
+      hue,
       size: 1 + Math.random() * 2
     });
   }
@@ -409,7 +470,10 @@ function launchFirework() {
 function animateFireworks(timestamp) {
   ctx.clearRect(0, 0, width, height);
 
-  if (timestamp - lastLaunch > 950 + Math.random() * 800) {
+  if (
+    timestamp - lastLaunch >
+    950 + Math.random() * 800
+  ) {
     launchFirework();
     lastLaunch = timestamp;
   }
@@ -425,7 +489,8 @@ function animateFireworks(timestamp) {
     p.life--;
 
     ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
-    ctx.fillStyle = "hsl(" + p.hue + ", 100%, 68%)";
+    ctx.fillStyle = `hsl(${p.hue}, 100%, 68%)`;
+
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
     ctx.fill();
